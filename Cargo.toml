@@ -1,0 +1,19 @@
+[package]
+authors = ["Kisio Digital <team.coretools@kisio.com>"]
+categories = ["data-structures", "parser-implementations"]
+description = "Navitia's POIs (Point of Interest) model"
+edition = "2018"
+keywords = ["data", "osm", "transit"]
+license = "AGPL-3.0-only"
+name = "navitia-poi-model"
+readme = "README.md"
+repository = "https://github.com/CanalTP/navitia-poi-model.git"
+version = "0.4.0"
+
+[dependencies]
+csv = "1"
+failure = "0.1"
+geo = "0.18"
+itertools = "0.10"
+serde = { version = "1.0", features = ["derive"] }
+zip = "0.5"
