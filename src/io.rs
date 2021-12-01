@@ -14,7 +14,7 @@
 
 use crate::Result;
 use crate::{Coord, Model, Poi, PoiType, Property};
-use failure::format_err;
+use anyhow::anyhow;
 use itertools::Itertools;
 use serde::{de::DeserializeOwned, Deserialize, Deserializer, Serialize, Serializer};
 use std::collections::{BTreeMap, HashMap};
@@ -99,7 +99,7 @@ where
         read_csv(zipper).try_for_each::<_, Result<_>>(|rec| {
             let poi_property: PoiProperty = rec?;
             let poi = pois.get_mut(&poi_property.poi_id).ok_or_else(|| {
-                format_err!(
+                anyhow!(
                     "in file '{}', cannot find poi '{}' for property insertion",
                     path.as_ref().display(),
                     &poi_property.poi_id
@@ -256,5 +256,5 @@ where
         .from_reader(reader);
     csv_reader
         .into_deserialize()
-        .map(|e| e.map_err(|e| format_err!("err {}", e)))
+        .map(|e| e.map_err(|e| anyhow!("err {}", e)))
 }

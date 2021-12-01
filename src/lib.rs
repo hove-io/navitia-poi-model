@@ -22,7 +22,7 @@ pub mod objects;
 pub use objects::*;
 
 /// The data type for errors in [navitia-poi-model], just an alias
-pub type Error = failure::Error;
+pub type Error = anyhow::Error;
 
 /// The classic alias for result type.
 pub type Result<T> = std::result::Result<T, Error>;
