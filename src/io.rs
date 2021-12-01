@@ -254,7 +254,8 @@ where
     let csv_reader = csv::ReaderBuilder::new()
         .delimiter(b';')
         .from_reader(reader);
+
     csv_reader
         .into_deserialize()
-        .map(|e| e.map_err(|e| anyhow!("err {}", e)))
+        .map(|line| line.map_err(Into::into))
 }
