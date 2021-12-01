@@ -16,4 +16,4 @@ failure = "0.1"
 geo = "0.18"
 itertools = "0.10"
 serde = { version = "1.0", features = ["derive"] }
-zip = "0.5"
+zip = { version = "0.5", default_features = false }
