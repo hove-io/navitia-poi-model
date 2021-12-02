@@ -2,7 +2,7 @@
 authors = ["Kisio Digital <team.coretools@kisio.com>"]
 categories = ["data-structures", "parser-implementations"]
 description = "Navitia's POIs (Point of Interest) model"
-edition = "2021"
+edition = "2018"
 keywords = ["data", "osm", "transit"]
 license = "AGPL-3.0-only"
 name = "navitia-poi-model"
