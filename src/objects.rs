@@ -21,7 +21,6 @@
 //!
 
 use crate::{io, Result};
-use failure::format_err;
 use serde::{Deserialize, Serialize};
 use std::collections::{
     btree_map::Entry as BTreeMapEntry, hash_map::Entry as HashMapEntry, BTreeMap, HashMap,
@@ -165,10 +164,9 @@ impl Model {
             .pois
             .into_iter()
             .try_fold(self.pois, |mut acc, (k, v)| match acc.entry(k) {
-                BTreeMapEntry::Occupied(entry) => Err(format_err!(
-                    "POI with id {} already in the model",
-                    entry.key()
-                )),
+                BTreeMapEntry::Occupied(entry) => {
+                    anyhow::bail!("POI with id {} already in the model", entry.key())
+                }
                 BTreeMapEntry::Vacant(entry) => {
                     entry.insert(v);
                     Ok(acc)
@@ -184,10 +182,7 @@ impl Model {
                         if *entry.get() == v {
                             Ok(acc) // If the poi_types in both map are identical (id and label), it's ok
                         } else {
-                            Err(format_err!(
-                                "Trying to override POI Type with id {}",
-                                entry.key()
-                            ))
+                            anyhow::bail!("Trying to override POI Type with id {}", entry.key())
                         }
                     }
                     HashMapEntry::Vacant(entry) => {
